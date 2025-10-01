@@ -12,6 +12,9 @@ const kHeight5 = SizedBox(height: 5,);
 const kHeight18 = SizedBox(height: 18,);
 const kHeight25 = SizedBox(height: 25,);
 const kHeight12 = SizedBox(height: 12,);
+const kHeight8 = SizedBox(height: 8,);
+
+
 
 
 //padding

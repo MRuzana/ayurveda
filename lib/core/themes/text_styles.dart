@@ -7,6 +7,12 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     color: Color(0xFF404040)
   );
+
+  static TextStyle heading2 = GoogleFonts.poppins(
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    color: Color(0xFF000000)
+  );
  
   static TextStyle textXSmallBlack = GoogleFonts.poppins(
     fontSize: 12,

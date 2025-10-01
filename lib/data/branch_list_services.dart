@@ -1,11 +1,12 @@
 import 'dart:convert';
+
 import 'package:ayurveda/core/api/api_constants.dart';
 import 'package:ayurveda/core/api/endpoints.dart';
-import 'package:ayurveda/domain/models/patient_list_model.dart';
+import 'package:ayurveda/domain/models/branch_list_modal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-class PatientListServices {
+class BranchListServices {
 
   String? token;
 
@@ -14,13 +15,13 @@ class PatientListServices {
     token = prefs.getString('jwtToken');
   }
 
-  Future<List<PatientListModel>> fetchPatients() async {
+  Future<List<BranchListModel>> fetchBranches() async {
     if (token == null) {
       await _loadToken(); // Ensure token is loaded before making request
     }
 
-    final String patientListUrl = ApiConstants.kBaseUrl + EndPoints.patientList;
-    final url = Uri.parse(patientListUrl);
+    final String branchListUrl = ApiConstants.kBaseUrl + EndPoints.branchList;
+    final url = Uri.parse(branchListUrl);
 
     final response = await http.get(
       url,
@@ -34,8 +35,8 @@ class PatientListServices {
       final data = jsonDecode(response.body);
       if (data['status'] == true) {
 
-        List patientsList = data['patient'] ?? [];
-        return patientsList.map((p) => PatientListModel.fromJson(p)).toList();
+        List branchList = data['branches'] ?? [];
+        return branchList.map((p) => BranchListModel.fromJson(p)).toList();
         
       } else {
         throw Exception("Failed: ${data['message']}");

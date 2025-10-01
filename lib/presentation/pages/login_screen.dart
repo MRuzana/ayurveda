@@ -2,7 +2,6 @@ import 'package:ayurveda/core/constants/spacing_constants.dart';
 import 'package:ayurveda/core/constants/string_constants.dart';
 import 'package:ayurveda/core/themes/text_styles.dart';
 import 'package:ayurveda/core/utils/validators.dart';
-import 'package:ayurveda/data/login_services.dart';
 import 'package:ayurveda/presentation/widgets/button.dart';
 import 'package:ayurveda/presentation/widgets/text_field.dart';
 import 'package:flutter/material.dart';

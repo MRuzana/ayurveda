@@ -11,14 +11,15 @@ class PatientListProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  bool _isLoadingMore = false;
-  bool get isLoadingMore => _isLoadingMore;
-
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
   /// Fetch patient list
-  Future<void> fetchPatients() async {
+  Future<void> fetchPatients({bool reset = false}) async {
+
+    if (reset) {
+      _patients = []; //  clear old list on refresh
+    }
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();

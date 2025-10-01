@@ -47,19 +47,24 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (patientListProvider.patients.isEmpty) {
                         return const Center(child: Text("No patients found"));
                       }
-
-                      return ListView.builder(
-                        itemCount: patientListProvider.patients.length,
-                        itemBuilder: (context, index) {
-                          final patient = patientListProvider.patients[index];
-                          final formattedDate = formatDate(patient.date);
-                         
-                          return PatientListCard(
-                            patientListModel: patient,
-                            formattedDate: formattedDate,
-                            index: index + 1,
-                          );
+                
+                      return RefreshIndicator(
+                        onRefresh: ()async {
+                          await patientListProvider.fetchPatients(reset : true);
                         },
+                        child: ListView.builder(
+                          itemCount: patientListProvider.patients.length,
+                          itemBuilder: (context, index) {
+                            final patient = patientListProvider.patients[index];
+                            final formattedDate = formatDate(patient.date);
+                           
+                            return PatientListCard(
+                              patientListModel: patient,
+                              formattedDate: formattedDate,
+                              index: index + 1,
+                            );
+                          },
+                        ),
                       );
                     },
                   ),
@@ -75,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 buttonText: 'REGISTER NOW',
                 color: const Color(0xFF006837),
                 buttonPressed: () {
-                  // Your logic
+                  Navigator.pushNamed(context, '/register');
                 },
               ),
             ),

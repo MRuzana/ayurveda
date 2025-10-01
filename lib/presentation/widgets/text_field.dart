@@ -8,7 +8,7 @@ Widget textField({
   required AutovalidateMode autovalidateMode,
   
   bool isObscured = false,
-  
+  Widget? suffixIcon,
 
 }) {
   return TextFormField(
@@ -20,11 +20,12 @@ Widget textField({
       labelText: labelText,
       floatingLabelBehavior: FloatingLabelBehavior.never,
       hintStyle: const TextStyle(color: Color(0xFF858080),fontSize: 12), // Hint text color
-      
+      suffixIcon: suffixIcon
       
       
     ),
     validator: validator,
     autovalidateMode: autovalidateMode, 
+    
   );
 }
