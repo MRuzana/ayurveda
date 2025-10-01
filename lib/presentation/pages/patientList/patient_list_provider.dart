@@ -1,5 +1,5 @@
-import 'package:ayurveda/models/patient_list_model.dart';
-import 'package:ayurveda/services/patient_list_services.dart';
+import 'package:ayurveda/data/patient_list_services.dart';
+import 'package:ayurveda/domain/models/patient_list_model.dart';
 import 'package:flutter/material.dart';
 
 class PatientListProvider extends ChangeNotifier {

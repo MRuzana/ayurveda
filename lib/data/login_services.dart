@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:ayurveda/api/api_constants.dart';
-import 'package:ayurveda/api/endpoints.dart';
+import 'package:ayurveda/core/api/api_constants.dart';
+import 'package:ayurveda/core/api/endpoints.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';

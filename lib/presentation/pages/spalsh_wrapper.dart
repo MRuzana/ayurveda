@@ -12,7 +12,7 @@ class _SplashWrapperState extends State<SplashWrapper> {
   void initState() {
     super.initState();
     // Delay of 3 seconds
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: 1), () {
       // Navigate to Login Screen
       Navigator.pushReplacementNamed(context, '/login');
     });

@@ -1,7 +1,7 @@
-import 'package:ayurveda/controllers/patient_list_provider.dart';
 import 'package:ayurveda/core/themes/app_theme.dart';
+import 'package:ayurveda/presentation/pages/patientList/patient_list_provider.dart';
+import 'package:ayurveda/presentation/pages/spalsh_wrapper.dart';
 import 'package:ayurveda/routes/routes.dart';
-import 'package:ayurveda/views/spalsh_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

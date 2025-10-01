@@ -1,5 +1,5 @@
-import 'package:ayurveda/views/home_screen.dart';
-import 'package:ayurveda/views/login_screen.dart';
+import 'package:ayurveda/presentation/pages/login_screen.dart';
+import 'package:ayurveda/presentation/pages/patientList/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class Routes {

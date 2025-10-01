@@ -1,8 +1,7 @@
 import 'dart:convert';
-
-import 'package:ayurveda/api/api_constants.dart';
-import 'package:ayurveda/api/endpoints.dart';
-import 'package:ayurveda/models/patient_list_model.dart';
+import 'package:ayurveda/core/api/api_constants.dart';
+import 'package:ayurveda/core/api/endpoints.dart';
+import 'package:ayurveda/domain/models/patient_list_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -36,6 +35,7 @@ class PatientListServices {
       if (data['status'] == true) {
 
         List patientsList = data['patient'] ?? [];
+        print('111111111111111 : $patientsList');
         return patientsList.map((p) => PatientListModel.fromJson(p)).toList();
       } else {
         throw Exception("Failed: ${data['message']}");

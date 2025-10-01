@@ -14,10 +14,28 @@ class AppTextStyles {
     color: Colors.black
   );
 
-  static TextStyle textXMediumBlack = GoogleFonts.poppins(
+  static TextStyle textXMediumLightBlack = GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.w400,
     color: Color(0xFF404040)
+  );
+
+  static TextStyle textXMediumBlack = GoogleFonts.poppins(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    color: Color(0xFF000000)
+  );
+
+  static TextStyle textXMediumBlack2 = GoogleFonts.poppins(
+    fontSize: 16,
+    fontWeight: FontWeight.w300,
+    color: Color(0xFF000000)
+  );
+
+  static TextStyle textXMediumGreen = GoogleFonts.poppins(
+    fontSize: 16,
+    fontWeight: FontWeight.w300,
+    color: Color(0xFF006837)
   );
 
 

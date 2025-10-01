@@ -1,6 +1,9 @@
-import 'package:ayurveda/controllers/patient_list_provider.dart';
-import 'package:ayurveda/views/widgets/button_small.dart';
+import 'package:ayurveda/presentation/pages/patientList/patient_list_card.dart';
+import 'package:ayurveda/presentation/pages/patientList/patient_list_provider.dart';
+import 'package:ayurveda/presentation/widgets/button.dart';
+import 'package:ayurveda/presentation/widgets/button_small.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,12 +14,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-   @override
+  @override
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<PatientListProvider>(context, listen: false).fetchPatients());
+        Provider.of<PatientListProvider>(context, listen: false)
+            .fetchPatients());
   }
 
   @override
@@ -24,35 +27,60 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: _buildAppBar(context),
-      body: Column(
-        children: [
-          _buildSortBar(),
-          Divider(),
-          Expanded(
-            child: Consumer<PatientListProvider>(
-              builder: (context, patientListProvider, _) {
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                _buildSortBar(),
+                Divider(),
+                Expanded(
+                  child: Consumer<PatientListProvider>(
+                    builder: (context, patientListProvider, _) {
+                      if (patientListProvider.isLoading) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (patientListProvider.errorMessage != null) {
+                        return Center(
+                            child: Text(
+                                'Error: ${patientListProvider.errorMessage!}'));
+                      }
+                      if (patientListProvider.patients.isEmpty) {
+                        return const Center(child: Text("No patients found"));
+                      }
 
-                if (patientListProvider.isLoading) {
-             return const Center(child: CircularProgressIndicator());
-          }
-          else if (patientListProvider.errorMessage != null) {
-           return Center(child: Text('Error: ${patientListProvider.errorMessage!}'));
-          }
-          if (patientListProvider.patients.isEmpty) {
-            return const Center(child: Text("No patients found"));
-          }
-                
-              },
-              // child: ListView.builder(
-              //   padding: const EdgeInsets.only(top: 10, left: 16, right: 16),
-              //   itemCount: bookings.length,
-              //   itemBuilder: (context, index) {
-              //     return BookingItem(booking: bookings[index]);
-              //   },
-              // ),
+                      return ListView.builder(
+                        itemCount: patientListProvider.patients.length,
+                        itemBuilder: (context, index) {
+                          final patient = patientListProvider.patients[index];
+                          final formattedDate = formatDate(patient.date);
+                         
+                          return PatientListCard(
+                            patientListModel: patient,
+                            formattedDate: formattedDate,
+                            index: index + 1,
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+            // Floating bottom button
+            Positioned(
+              bottom: 16,
+              left: 16,
+              right: 16,
+              child: button(
+                buttonText: 'REGISTER NOW',
+                color: const Color(0xFF006837),
+                buttonPressed: () {
+                  // Your logic
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -82,7 +110,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: TextField(
                     //controller: _searchController,
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 12),
                       prefixIcon: const Icon(Icons.search),
                       hintText: "Search for treatments",
                       border: OutlineInputBorder(
@@ -97,7 +126,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   buttonText: 'Search ',
                   color: const Color(0xFF006837),
                   buttonPressed: () {})
-
             ],
           ),
         ),
@@ -140,4 +168,16 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  String formatDate(String? apiDate) {
+  if (apiDate == null || apiDate.isEmpty) {
+    return ""; // show empty or "N/A"
+  }
+  try {
+    DateTime parsedDate = DateTime.parse(apiDate);
+    return DateFormat("dd/MM/yyyy").format(parsedDate);
+  } catch (e) {
+    return ""; // fallback if parsing fails
+  }
+}
 }

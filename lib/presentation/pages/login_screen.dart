@@ -1,10 +1,10 @@
 import 'package:ayurveda/core/constants/spacing_constants.dart';
 import 'package:ayurveda/core/constants/string_constants.dart';
 import 'package:ayurveda/core/themes/text_styles.dart';
-import 'package:ayurveda/core/validators.dart';
-import 'package:ayurveda/services/login_services.dart';
-import 'package:ayurveda/views/widgets/button.dart';
-import 'package:ayurveda/views/widgets/text_field.dart';
+import 'package:ayurveda/core/utils/validators.dart';
+import 'package:ayurveda/data/login_services.dart';
+import 'package:ayurveda/presentation/widgets/button.dart';
+import 'package:ayurveda/presentation/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                       kHeight20,
                       Text(
                         'Username',
-                        style: AppTextStyles.textXMediumBlack,
+                        style: AppTextStyles.textXMediumLightBlack,
                       ),
                       kHeight5,
                       textField(
@@ -66,7 +66,7 @@ class LoginScreen extends StatelessWidget {
                       kHeight18,
                       Text(
                         'Password',
-                        style: AppTextStyles.textXMediumBlack,
+                        style: AppTextStyles.textXMediumLightBlack,
                       ),
                       kHeight5,
                       textField(
@@ -83,25 +83,19 @@ class LoginScreen extends StatelessWidget {
                         buttonText: 'LOGIN',
                         color: const Color(0xFF006837),
                         buttonPressed: () async {
-                          //Navigator.pushNamed(context, '/home');
-                          if (_formKey.currentState!.validate()) {
-                            final bool isVerified = await LoginServices()
-                                .sendCredentials(
-                                    username: _usernameController.text.trim(),
-                                    password: _passwordController.text.trim());
+                          Navigator.pushNamed(context, '/home');
+                          // if (_formKey.currentState!.validate()) {
+                          //   final bool isVerified = await LoginServices()
+                          //       .sendCredentials(
+                          //           username: _usernameController.text.trim(),
+                          //           password: _passwordController.text.trim());
 
-                            if (isVerified) {
-                              Navigator.pushNamedAndRemoveUntil(
-                                  context, '/home', (route) => false);
-                            }
-                            //  else {
-                            //   ScaffoldMessenger.of(context).showSnackBar(
-                            //     SnackBar(
-                            //         content:
-                            //             Text('Invalid Credentials, please try again.')),
-                            //   );
-                            // }
-                          }
+                          //   if (isVerified) {
+                          //     Navigator.pushNamedAndRemoveUntil(
+                          //         context, '/home', (route) => false);
+                          //   }
+                          
+                          // }
                         },
                       ),
                     ],
